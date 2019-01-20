@@ -4,6 +4,7 @@ namespace StoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Category
@@ -25,7 +26,13 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Type("string")
+     *
+     * @Assert\Length(min=3, max=255)
      */
     private $name;
 

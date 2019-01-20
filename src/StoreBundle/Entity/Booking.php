@@ -4,6 +4,7 @@ namespace StoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Booking
@@ -36,6 +37,7 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=255)
+     *
      */
     private $status;
 
@@ -43,6 +45,8 @@ class Booking
      * @var \DateTime
      *
      * @ORM\Column(name="bookingDate", type="datetime")
+     *
+     * @Assert\DateTime()
      */
     private $bookingDate;
 

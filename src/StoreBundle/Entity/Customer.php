@@ -4,6 +4,7 @@ namespace StoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Customer
@@ -26,13 +27,25 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Type("string")
+     *
+     * @Assert\Length(min=3, max=255)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Type("string")
+     *
+     * @Assert\Length(min=3, max=255)
      */
     private $lastName;
 
@@ -40,6 +53,10 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Email()
      */
     private $email;
 
@@ -47,6 +64,10 @@ class Customer
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255, unique=true)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Type("string")
      */
     private $phone;
 

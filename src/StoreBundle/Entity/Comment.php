@@ -3,6 +3,7 @@
 namespace StoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comment
@@ -25,6 +26,10 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Length(min=1, max=1000)
      */
     private $content;
 
@@ -32,6 +37,8 @@ class Comment
      * @var \DateTime
      *
      * @ORM\Column(name="datePublication", type="datetime")
+     *
+     * @Assert\DateTime()
      */
     private $datePublication;
 

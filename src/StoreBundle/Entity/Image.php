@@ -3,6 +3,7 @@
 namespace StoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -25,6 +26,10 @@ class Image
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Length(max=255)
      */
     private $name;
 

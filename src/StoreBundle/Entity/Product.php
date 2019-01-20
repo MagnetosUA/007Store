@@ -4,6 +4,7 @@ namespace StoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -26,11 +27,19 @@ class Product
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Type("string")
+     *
+     * @Assert\Length(min=3, max=255)
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="StoreBundle\Entity\Category", inversedBy="products")
+     *
+     * @Assert\Valid()
      */
     private $category;
 
@@ -43,6 +52,10 @@ class Product
 
     /**
      * @ORM\OneToMany(targetEntity="StoreBundle\Entity\Image", mappedBy="product")
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Type("integer")
      */
     private $images;
 
@@ -50,16 +63,24 @@ class Product
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Valid()
      */
     private $created;
 
     /**
      * @ORM\ManyToMany(targetEntity="StoreBundle\Entity\Booking", inversedBy="products")
+     *
+     * @Assert\DateTime()
+     *
      */
     private $orders;
 
     /**
      * @ORM\ManyToOne(targetEntity="StoreBundle\Entity\Comment")
+     *
      */
     private $comments;
 
