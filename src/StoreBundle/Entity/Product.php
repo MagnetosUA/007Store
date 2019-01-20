@@ -1,14 +1,15 @@
 <?php
 
-namespace Symfony\Bundle\SecurityBundle\Entity;
+namespace StoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Product
  *
  * @ORM\Table(name="product")
- * @ORM\Entity(repositoryClass="Symfony\Bundle\SecurityBundle\Repository\ProductRepository")
+ * @ORM\Entity(repositoryClass="StoreBundle\Repository\ProductRepository")
  */
 class Product
 {
@@ -29,11 +30,9 @@ class Product
     private $name;
 
     /**
-     * @var \stdClass
-     *
-     * @ORM\Column(name="categoty", type="object")
+     * @ORM\ManyToOne(targetEntity="StoreBundle\Entity\Category", inversedBy="products")
      */
-    private $categoty;
+    private $category;
 
     /**
      * @var int
@@ -43,9 +42,7 @@ class Product
     private $price;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="images", type="array")
+     * @ORM\OneToMany(targetEntity="StoreBundle\Entity\Image", mappedBy="product")
      */
     private $images;
 
@@ -56,7 +53,25 @@ class Product
      */
     private $created;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="StoreBundle\Entity\Booking", inversedBy="products")
+     */
+    private $orders;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="StoreBundle\Entity\Comment")
+     */
+    private $comments;
+
+    /**
+     * Product constructor.
+     */
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->images = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -91,16 +106,14 @@ class Product
         return $this->name;
     }
 
+
     /**
-     * Set categoty
-     *
-     * @param \stdClass $categoty
-     *
-     * @return Product
+     * @param $category
+     * @return $this
      */
-    public function setCategoty($categoty)
+    public function setCategory($category)
     {
-        $this->categoty = $categoty;
+        $this->category = $category;
 
         return $this;
     }
@@ -110,9 +123,9 @@ class Product
      *
      * @return \stdClass
      */
-    public function getCategoty()
+    public function getCategory()
     {
-        return $this->categoty;
+        return $this->category;
     }
 
     /**
@@ -140,23 +153,18 @@ class Product
     }
 
     /**
-     * Set images
-     *
-     * @param array $images
-     *
-     * @return Product
+     * @param $image
+     * @return $this
      */
-    public function setImages($images)
+    public function addImage($image)
     {
-        $this->images = $images;
+        $this->images[] = $image;
 
         return $this;
     }
 
     /**
-     * Get images
-     *
-     * @return array
+     * @return ArrayCollection
      */
     public function getImages()
     {
@@ -185,6 +193,42 @@ class Product
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @param $order
+     * @return $this
+     */
+    public function addOrder($order)
+    {
+        $this->orders[] = $order;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param $comment
+     * @return $this
+     */
+    public function addComment($comment)
+    {
+        $this->comments[] = $comment;
+        return $this;
     }
 }
 

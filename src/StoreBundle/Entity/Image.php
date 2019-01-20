@@ -28,7 +28,6 @@ class Image
      */
     private $name;
 
-
     /**
      * Get id
      *

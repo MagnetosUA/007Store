@@ -2,6 +2,7 @@
 
 namespace StoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +29,20 @@ class Category
      */
     private $name;
 
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="StoreBundle\Entity\Product", mappedBy="category")
+     */
+    private $products;
 
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -61,6 +75,33 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+
+    /**
+     * @param $product
+     * @return $this
+     */
+    public function addProducts($product)
+    {
+        $this->products[] = $product;
+        return $this;
+    }
+
+    /**
+     * @param $product
+     */
+    public function removeProduct($product)
+    {
+        unset($this->products[$product]);
     }
 }
 

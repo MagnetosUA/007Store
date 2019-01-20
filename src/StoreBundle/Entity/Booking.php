@@ -2,6 +2,7 @@
 
 namespace StoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,16 +23,12 @@ class Booking
     private $id;
 
     /**
-     * @var \stdClass
-     *
-     * @ORM\Column(name="product", type="object")
+     * @ORM\ManyToMany(targetEntity="StoreBundle\Entity\Product", inversedBy="orders")
      */
-    private $product;
+    private $products;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="customer", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="StoreBundle\Entity\Customer", mappedBy="orders")
      */
     private $customer;
 
@@ -50,6 +47,11 @@ class Booking
     private $bookingDate;
 
 
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -60,29 +62,6 @@ class Booking
         return $this->id;
     }
 
-    /**
-     * Set product
-     *
-     * @param \stdClass $product
-     *
-     * @return Booking
-     */
-    public function setProduct($product)
-    {
-        $this->product = $product;
-
-        return $this;
-    }
-
-    /**
-     * Get product
-     *
-     * @return \stdClass
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
 
     /**
      * Set customer
@@ -155,5 +134,24 @@ class Booking
     {
         return $this->bookingDate;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param $product
+     * @return $this
+     */
+    public function addProducts($product)
+    {
+        $this->products[] = $product;
+        return $this;
+    }
+
 }
 

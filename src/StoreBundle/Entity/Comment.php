@@ -36,14 +36,6 @@ class Comment
     private $datePublication;
 
     /**
-     * @var \stdClass
-     *
-     * @ORM\Column(name="product", type="object")
-     */
-    private $product;
-
-
-    /**
      * Get id
      *
      * @return int
@@ -101,28 +93,5 @@ class Comment
         return $this->datePublication;
     }
 
-    /**
-     * Set product
-     *
-     * @param \stdClass $product
-     *
-     * @return Comment
-     */
-    public function setProduct($product)
-    {
-        $this->product = $product;
-
-        return $this;
-    }
-
-    /**
-     * Get product
-     *
-     * @return \stdClass
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
 }
 

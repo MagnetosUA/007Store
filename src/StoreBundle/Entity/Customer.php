@@ -2,6 +2,7 @@
 
 namespace StoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +50,15 @@ class Customer
      */
     private $phone;
 
+    /**
+     * @ORM\OneToMany(targetEntity="StoreBundle\Entity\Booking", mappedBy="customer")
+     */
+    private $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -155,5 +165,24 @@ class Customer
     {
         return $this->phone;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @param $order
+     * @return $this
+     */
+    public function setOrder($order)
+    {
+        $this->orders[] = $order;
+        return $this;
+    }
+
 }
 
