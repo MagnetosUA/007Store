@@ -4,7 +4,6 @@ namespace StoreBundle\Form\Type;
 
 use StoreBundle\Entity\Customer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,8 +17,7 @@ class CustomerType extends AbstractType
             ->add('name')
             ->add('last_name')
             ->add('email', EmailType::class)
-            ->add('phone', TelType::class)
-            ->add('date_registration', DateType::class);
+            ->add('phone', TelType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
