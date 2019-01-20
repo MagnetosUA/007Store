@@ -76,9 +76,21 @@ class Customer
      */
     private $orders;
 
+    /**
+     * @ORM\Column(name="date_registration", type="datetime")
+     *
+     * @Assert\DateTime()
+     */
+    private $dateRegistration;
+
+    /**
+     * Customer constructor.
+     * @throws \Exception
+     */
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->dateRegistration = new \DateTime();
     }
 
     /**
@@ -203,6 +215,14 @@ class Customer
     {
         $this->orders[] = $order;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateRegistration()
+    {
+        return $this->dateRegistration;
     }
 
 }
