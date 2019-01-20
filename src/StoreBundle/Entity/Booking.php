@@ -50,10 +50,16 @@ class Booking
      */
     private $bookingDate;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $deliveryAddress;
+
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->bookingDate = new \DateTime();
     }
 
     /**
@@ -116,20 +122,6 @@ class Booking
     }
 
     /**
-     * Set bookingDate
-     *
-     * @param \DateTime $bookingDate
-     *
-     * @return Booking
-     */
-    public function setBookingDate($bookingDate)
-    {
-        $this->bookingDate = $bookingDate;
-
-        return $this;
-    }
-
-    /**
      * Get bookingDate
      *
      * @return \DateTime
@@ -155,6 +147,22 @@ class Booking
     {
         $this->products[] = $product;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeliveryAddress()
+    {
+        return $this->deliveryAddress;
+    }
+
+    /**
+     * @param mixed $deliveryAddress
+     */
+    public function setDeliveryAddress($deliveryAddress)
+    {
+        $this->deliveryAddress = $deliveryAddress;
     }
 
 }
